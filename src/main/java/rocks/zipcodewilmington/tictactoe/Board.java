@@ -4,54 +4,59 @@ package rocks.zipcodewilmington.tictactoe;
  * @author leon on 6/22/18.
  */
 public class Board {
+    private Character[][] board;
+
     public Board(Character[][] matrix) {
-
-        Character[][] board = new matrix;
+        this.board = matrix;
     }
 
-    public TicTacToeBoard(Character victorySymbol) {
-        Board[][] board = new Board[][];
-        Character xOrO = victorySymbol;
-        //horizontal victory
-        if (board[0][0].equals(xOrO) && board[0][1].equals(xOrO) && board[0][2].equals(xOrO))
+    public boolean checkHorizontal(Character xO){
+        for (int i = 0; i < 2; i++) {
+            if ((board[0][i] == xO) && (board[1][i] == xO) && (board[2][i] == xO)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkVertical(Character xO){
+        for(int i = 0; i < 2; i++){
+            if ((board[i][0] == xO) && (board[i][1] == xO) && (board[i][2] == xO)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkDiagonal(Character xO) {
+        if ((board[0][0] == xO && board[1][1] == xO && board[2][2] == xO)
+                || (board [2][0] == xO && board[1][1] == xO && board[0][2] == xO)){
             return true;
-        else if (board[1][0].equals(xOrO) && board[1][1].equals(xOrO) && board[1][2].equals(xOrO))
-            return true;
-        else if (board[2][0].equals(xOrO) && board[2][1].equals(xOrO) && board[2][2].equals(xOrO))
-            return true;
-            //vertical victory
-        else if (board[0][0].equals(xOrO) && board[1][0].equals(xOrO) && board[2][0].equals(xOrO))
-            return true;
-        else if (board[1][0].equals(xOrO) && board[1][1].equals(xOrO) && board[2][1].equals(xOrO))
-            return true;
-        else if (board[0][2].equals(xOrO) && board[1][2].equals(xOrO) && board[2][2].equals(xOrO))
-            return true;
-            //diagonal victory
-        else if (board[0][0].equals(xOrO) && board[1][1].equals(xOrO) && board[2][2].equals(xOrO))
-            return true;
-        else if (board[0][2].equals(xOrO) && board[1][1].equals(xOrO) && board[2][0].equals(xOrO))
-            return true;
-        else
+        } else {
             return false;
-    }
-
-
-
-    public Boolean isInFavorOfX() {
-
         }
     }
-    
-    
 
+    public Boolean isInFavorOfX() {
+        if(checkHorizontal('X') || checkDiagonal('X') || checkVertical('X')){
+            return true;
+        } else {
+            return false;
+        }
+    }
     public Boolean isInFavorOfO() {
-
-            
+        if(checkHorizontal('O') || checkDiagonal('O') || checkVertical('O')){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Boolean isTie() {
-        Board[][] board = new Board[][];
-
+        if(!checkHorizontal('X') && !checkDiagonal('X') && !checkVertical('O')) {
+            return true;
+        } else {
+            return false;
         }
     }
 
