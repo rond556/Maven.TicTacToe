@@ -11,7 +11,7 @@ public class Board {
     }
 
     public boolean checkHorizontal(Character xO){
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i <= 2; i++) {
             if ((board[0][i] == xO) && (board[1][i] == xO) && (board[2][i] == xO)) {
                 return true;
             }
@@ -20,7 +20,7 @@ public class Board {
     }
 
     public boolean checkVertical(Character xO){
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i <= 2; i++){
             if ((board[i][0] == xO) && (board[i][1] == xO) && (board[i][2] == xO)) {
                 return true;
             }
@@ -53,7 +53,8 @@ public class Board {
     }
 
     public Boolean isTie() {
-        if(!checkHorizontal('X') && !checkDiagonal('X') && !checkVertical('O')) {
+        if(!checkHorizontal('X') && !checkDiagonal('X') && !checkVertical('X')
+        && !checkHorizontal('O') && !checkDiagonal('O') && !checkVertical('O')){
             return true;
         } else {
             return false;
@@ -61,7 +62,12 @@ public class Board {
     }
 
     public String getWinner() {
-        return null;
+        if(isInFavorOfX()){
+            return "X";
+        } else if (isInFavorOfO()){
+            return "O";
+        } else {
+            return "";
+        }
     }
-
 }
